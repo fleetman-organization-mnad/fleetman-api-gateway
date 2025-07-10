@@ -8,8 +8,7 @@ on:
 env:
   AWS_REGION: eu-north-1
   AWS_ROLE: arn:aws:iam::491085414331:role/PushToECR
-  ECR_REPOSITORY: fleetman-organization-mnad/fleetman-api-gateway
-  IMAGE_URI: 491085414331.dkr.ecr.eu-north-1.amazonaws.com/${{ env.ECR_REPOSITORY }}
+  IMAGE_URI: 491085414331.dkr.ecr.eu-north-1.amazonaws.com/fleetman-organization-mnad/fleetman-api-gateway
 
 jobs:
   build-and-push:
