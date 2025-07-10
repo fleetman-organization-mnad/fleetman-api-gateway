@@ -7,9 +7,9 @@ on:
 
 env:
   AWS_REGION: eu-north-1
-  ECR_REPOSITORY: fleetman-organization-mnad/fleetman-webapp
   AWS_ROLE: arn:aws:iam::491085414331:role/PushToECR
-  IMAGE_TAG: ${{ github.sha }}
+  ECR_REPOSITORY: fleetman-organization-mnad/fleetman-api-gateway
+  IMAGE_URI: 491085414331.dkr.ecr.eu-north-1.amazonaws.com/${{ env.ECR_REPOSITORY }}
 
 jobs:
   build-and-push:
@@ -46,6 +46,5 @@ jobs:
 
       - name: Build, tag, and push Docker image
         run: |
-          IMAGE_URI=491085414331.dkr.ecr.eu-north-1.amazonaws.com/fleetman-organization-mnad/fleetman-webapp
           docker build -t $IMAGE_URI:$GITHUB_SHA .
           docker push $IMAGE_URI:$GITHUB_SHA
