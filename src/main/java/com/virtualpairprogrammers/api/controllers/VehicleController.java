@@ -33,7 +33,7 @@ public class VehicleController
 	
 	@GetMapping("/")
 	@ResponseBody
-	/**
+	/*
 	 * This is just a test mapping so we can easily check the API gateway is standing.
 	 * When running through the Angular Front end, can visit this URL at /api/
 	 */
