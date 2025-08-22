@@ -61,8 +61,10 @@ jobs:
 
       - name: Build, tag, and push Docker image
         run: |
-          docker build -t $IMAGE_URI:$GITHUB_SHA .
-          docker push $IMAGE_URI:$GITHUB_SHA
+          docker build -t $IMAGE_URI:$BUILD_ID .
+          docker tag $IMAGE_URI:$BUILD_ID $IMAGE_URI:$LATEST_ID
+          docker push $IMAGE_URI:$BUILD_ID
+          docker push $IMAGE_URI:$LATEST_ID
 
       - name: Show pushed image tags
         run: |
