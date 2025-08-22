@@ -1,9 +1,9 @@
-name: Build and Push to ECR on Develop
+name: Build and Push to ECR on master
 
 on:
   push:
     branches:
-      - develop
+      - master
 
 env:
   AWS_REGION: eu-north-1
@@ -43,7 +43,29 @@ jobs:
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
 
+      - name: Prepare image tags
+        id: prep
+        run: |
+          BRANCH=${GITHUB_REF##*/}
+          TS=$(date +%s)
+          REVISION=${GITHUB_SHA::8}
+          BUILD_ID="${BRANCH}-${REVISION}-${TS}"
+          LATEST_ID=canary
+          if [[ $GITHUB_REF == refs/tags/* ]]; then
+            BUILD_ID=${GITHUB_REF/refs\/tags\//}
+            LATEST_ID=latest
+          fi
+          echo "BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')" >> $GITHUB_ENV
+          echo "BUILD_ID=${BUILD_ID}" >> $GITHUB_ENV
+          echo "LATEST_ID=${LATEST_ID}" >> $GITHUB_ENV
+
       - name: Build, tag, and push Docker image
         run: |
           docker build -t $IMAGE_URI:$GITHUB_SHA .
           docker push $IMAGE_URI:$GITHUB_SHA
+
+      - name: Show pushed image tags
+        run: |
+          echo "Pushed image tags:"
+          echo " - $IMAGE_URI:$BUILD_ID"
+          echo " - $IMAGE_URI:$LATEST_ID"
