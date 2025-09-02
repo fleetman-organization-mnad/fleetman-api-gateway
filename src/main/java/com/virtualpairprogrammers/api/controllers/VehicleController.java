@@ -50,6 +50,7 @@ public class VehicleController
         logger.info("Getting history for vehicle {}", vehicleName);
 		Collection<LatLong> results = new ArrayList<>();
 		Collection<VehiclePosition> vehicles = externalService.getHistoryFor(vehicleName);
+        logger.info("Found {} positions for vehicle {}", vehicles.size(), vehicleName);
 		for (VehiclePosition next: vehicles)
 		{
 			LatLong position = new LatLong(next.getLat(), next.getLongitude()); 
