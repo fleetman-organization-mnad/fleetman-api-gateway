@@ -68,3 +68,5 @@ public class VehicleController
         return externalService.getAllPositions();
     }
 }
+
+// dummy change
