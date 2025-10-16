@@ -7,8 +7,8 @@ on:
 
 env:
   AWS_REGION: eu-north-1
-  AWS_ROLE: arn:aws:iam::491085414331:role/PushToECR
-  IMAGE_URI: 491085414331.dkr.ecr.eu-north-1.amazonaws.com/fleetman-organization-mnad/fleetman-api-gateway
+  AWS_ROLE: arn:aws:iam::390783053421:role/PushToECR
+  IMAGE_URI: 390783053421.dkr.ecr.eu-north-1.amazonaws.com/fleetman-organization-mnad/fleetman-api-gateway
 
 jobs:
   build-and-push:
